@@ -2,6 +2,8 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const routerApi = require('./routes')
 
+require('./libs/sequelize')
+
 const app = express()
 const port = process.env.PORT || 3000
 
