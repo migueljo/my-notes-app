@@ -1,4 +1,5 @@
 const { ImageSchema, Image } = require('./models/image.model')
+const { NoteTag, NoteTagSchema } = require('./models/note-tag.model')
 const { Note, NoteSchema } = require('./models/note.model')
 const { Tag, TagSchema } = require('./models/tag.model')
 const { User, UserSchema } = require('./models/user.model')
@@ -8,6 +9,7 @@ function setupModels (sequelize) {
   Note.init(NoteSchema, Note.config(sequelize))
   Image.init(ImageSchema, Image.config(sequelize))
   Tag.init(TagSchema, Tag.config(sequelize))
+  NoteTag.init(NoteTagSchema, NoteTag.config(sequelize))
 
   Note.associate(sequelize.models)
   Image.associate(sequelize.models)

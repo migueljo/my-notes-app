@@ -10,6 +10,4 @@ const sequelize = new Sequelize(config.dbUrl, {
 
 setupModels(sequelize)
 
-sequelize.sync({ force: true }).catch(console.error)
-
 module.exports = sequelize
