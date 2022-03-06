@@ -25,20 +25,18 @@ const UserSchema = {
   picture: {
     type: DataTypes.STRING,
     allowNull: true
+  },
+  createdAt: {
+    type: DataTypes.DATE,
+    field: 'created_at',
+    allowNull: false,
+    defaultValue: DataTypes.NOW
   }
 }
 
 class User extends Model {
   static associate (models) {
     this.hasMany(models.Note, { as: 'notes' })
-  }
-
-  static config (sequelize) {
-    return {
-      sequelize,
-      tableName: USER_TABLE,
-      modelName: 'User'
-    }
   }
 }
 

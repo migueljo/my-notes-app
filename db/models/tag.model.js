@@ -18,20 +18,18 @@ const TagSchema = {
     type: DataTypes.STRING,
     allowNull: false,
     unique: true
+  },
+  createdAt: {
+    type: DataTypes.DATE,
+    field: 'created_at',
+    allowNull: false,
+    defaultValue: DataTypes.NOW
   }
 }
 
 class Tag extends Model {
   static associate (models) {
     this.belongsToMany(models.Notes, { through: 'notes_tags', as: 'notes' })
-  }
-
-  static config (sequelize) {
-    return {
-      sequelize,
-      tableName: TAG_TABLE,
-      modelName: 'Tag'
-    }
   }
 }
 

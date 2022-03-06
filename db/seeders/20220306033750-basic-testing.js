@@ -4,15 +4,15 @@ const { IMAGE_TABLE } = require('../models/image.model')
 const { TAG_TABLE } = require('../models/tag.model')
 const { NOTE_TAG_TABLE } = require('../models/note-tag.model')
 
-const data = require('../data/basic-testing')
+const { getUsers, getNotes, getTags, getImages, getNotesTags } = require('../data/basic-testing')
 
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.bulkInsert(USER_TABLE, data.users, {})
-    await queryInterface.bulkInsert(NOTE_TABLE, data.notes, {})
-    await queryInterface.bulkInsert(IMAGE_TABLE, data.images, {})
-    await queryInterface.bulkInsert(TAG_TABLE, data.tags, {})
-    await queryInterface.bulkInsert(NOTE_TAG_TABLE, data.notesTags, {})
+    await queryInterface.bulkInsert(USER_TABLE, await getUsers(), {})
+    await queryInterface.bulkInsert(NOTE_TABLE, getNotes(), {})
+    await queryInterface.bulkInsert(IMAGE_TABLE, getImages(), {})
+    await queryInterface.bulkInsert(TAG_TABLE, getTags(), {})
+    await queryInterface.bulkInsert(NOTE_TAG_TABLE, getNotesTags(), {})
   },
 
   async down (queryInterface, Sequelize) {

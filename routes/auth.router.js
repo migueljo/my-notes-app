@@ -1,14 +1,26 @@
+require('../utils/auth/setup-auth-strategies')
+
 const { Router } = require('express')
-const validatorHandler = require('../middleware/validator-handler.middleware')
-const { loginUserSchema } = require('../schemas/auth.schema')
+const passport = require('passport')
+const jwt = require('jsonwebtoken')
+
+const userService = require('../services/user.service')
+const config = require('../config')
 
 const router = Router()
 
 router.post(
   '/login',
-  validatorHandler(loginUserSchema, 'body'),
-  async (req, res) => {
-    res.json(req.body)
+  passport.authenticate('local', { session: false }),
+  async (req, res, next) => {
+    try {
+      const user = await userService.findByEmail(req.body.email, req.body.password)
+      const token = jwt.sign({ sub: user.id }, config.jwtSecret)
+
+      res.json({ user, token })
+    } catch (error) {
+      next(error)
+    }
   }
 )
 

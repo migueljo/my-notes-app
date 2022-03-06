@@ -24,20 +24,18 @@ const ImageSchema = {
     },
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE'
+  },
+  createdAt: {
+    type: DataTypes.DATE,
+    field: 'created_at',
+    allowNull: false,
+    defaultValue: DataTypes.NOW
   }
 }
 
 class Image extends Model {
   static associate (models) {
     this.belongsTo(models.Note, { as: 'note' })
-  }
-
-  static config (sequelize) {
-    return {
-      sequelize,
-      tableName: IMAGE_TABLE,
-      modelName: 'Image'
-    }
   }
 }
 

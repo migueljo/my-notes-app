@@ -28,19 +28,17 @@ const NoteTagSchema = {
       key: 'id'
     },
     onDelete: 'CASCADE'
+  },
+  createdAt: {
+    type: DataTypes.DATE,
+    field: 'created_at',
+    allowNull: false,
+    defaultValue: DataTypes.NOW
   }
 }
 
 class NoteTag extends Model {
   static associate (models) {}
-
-  static config (sequelize) {
-    return {
-      sequelize,
-      tableName: NoteTagSchema,
-      modelName: 'NoteTag'
-    }
-  }
 }
 
 module.exports = { NOTE_TAG_TABLE, NoteTagSchema, NoteTag }
