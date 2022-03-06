@@ -21,6 +21,10 @@ const UserSchema = {
   name: {
     allowNull: false,
     type: DataTypes.STRING
+  },
+  picture: {
+    type: DataTypes.STRING,
+    allowNull: true
   }
 }
 
