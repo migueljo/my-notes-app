@@ -6,7 +6,12 @@ async function create (data) {}
 
 async function find () {}
 
-async function findOne (userId) {}
+async function findOne (userId) {
+  const user = await sequelize.models.User.findByPk(userId)
+  if (!user) throw boom.unauthorized()
+
+  return user
+}
 
 async function findByEmail (email) {
   const user = await sequelize.models.User.findOne({
@@ -19,7 +24,12 @@ async function findByEmail (email) {
   return user
 }
 
-async function update (userId, data) {}
+async function update (userId, data) {
+  const user = await findOne(userId)
+  const updatedUser = await user.update(data)
+
+  return updatedUser
+}
 
 async function remove (userId) {}
 
