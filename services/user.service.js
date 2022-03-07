@@ -2,9 +2,10 @@ const boom = require('@hapi/boom')
 
 const sequelize = require('../libs/sequelize')
 
-async function create (data) {}
-
-async function find () {}
+async function create (data) {
+  const user = await sequelize.models.User.create(data)
+  return user
+}
 
 async function findOne (userId) {
   const user = await sequelize.models.User.findByPk(userId)
@@ -31,11 +32,15 @@ async function update (userId, data) {
   return updatedUser
 }
 
-async function remove (userId) {}
+async function remove (userId) {
+  const user = await findOne(userId)
+  await user.destroy()
+
+  return { id: userId }
+}
 
 const userService = {
   create,
-  find,
   findOne,
   findByEmail,
   update,

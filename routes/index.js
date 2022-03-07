@@ -1,6 +1,7 @@
 const express = require('express')
 const notesRouter = require('./notes.router')
 const authRouter = require('./auth.router')
+const userRouter = require('./user.router')
 
 function routerApi (app) {
   const apiRouter = express.Router()
@@ -8,6 +9,7 @@ function routerApi (app) {
 
   apiRouter.use('/auth', authRouter)
   apiRouter.use('/notes', notesRouter)
+  apiRouter.use('/users', userRouter)
 }
 
 module.exports = routerApi
